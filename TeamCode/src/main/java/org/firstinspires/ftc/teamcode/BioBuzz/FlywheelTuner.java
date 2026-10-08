@@ -105,9 +105,9 @@ public class FlywheelTuner extends OpMode {
                 imu.getRotation2d().getDegrees()
         );
         if(gamepad1.left_bumper){
-            intake.setPower(1);
-        } else if(gamepad1.right_bumper){
             intake.setPower(-1);
+        } else if(gamepad1.right_bumper){
+            intake.setPower(1);
         } else {
             intake.setPower(0);
         }
