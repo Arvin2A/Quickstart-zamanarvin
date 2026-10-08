@@ -35,7 +35,7 @@ public class quickdrive extends OpMode {
     private double kP=0.2;
     private double kP2=0.3;
 
-    private boolean otherEnabled = false;
+    private final boolean otherEnabled = true;
 
     private boolean initializeLauncherAndTurretBeta() {
         if (!otherEnabled) return false;
@@ -99,9 +99,9 @@ public class quickdrive extends OpMode {
         //other
         if (initializedOther) {
             if (gamepad1.left_bumper) {
-                intake.setPower(1);
-            } else if (gamepad1.right_bumper) {
                 intake.setPower(-1);
+            } else if (gamepad1.right_bumper) {
+                intake.setPower(1);
             } else {
                 intake.setPower(0);
             }
