@@ -91,7 +91,7 @@ public class FlywheelTuner extends OpMode {
         turret.setZeroPowerBehavior(BRAKE);
         follower = Constants.create(hardwareMap);
         follower.setPose(new Pose(110, 135, Math.toRadians(90)));
-        telemetry.addData("Glucose Energy: ", "Initialized");
+        telemetry.addData("status: ", "Initialized");
         telemetry.update();
     }
     @Override
@@ -139,8 +139,8 @@ public class FlywheelTuner extends OpMode {
         follower.manual(-driverOp.getLeftY(), driverOp.getLeftX(), driverOp.getRightX());
         follower.update();
         Pose currentPose = follower.pose();
-        telemetry.addData("Glucose Energy: ", "Running");
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
+        telemetry.addData("status: ", "Running");
+        telemetry.addData("status:", "Run Time: " + runtime.toString());
         telemetry.update();
     }
 }

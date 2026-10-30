@@ -23,7 +23,7 @@ public class HoodTest extends LinearOpMode {
         theservo.scaleRange(0.0, 1.0);
 
 
-        telemetry.addData("status", "servo initialized");
+        telemetry.addData("status: ", "servo initialized");
         telemetry.update();
 
         waitForStart();
