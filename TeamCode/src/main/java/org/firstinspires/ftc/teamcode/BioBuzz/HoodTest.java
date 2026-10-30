@@ -15,6 +15,7 @@ public class HoodTest extends LinearOpMode {
 
     public int currentPositionChangeAmount = 0;
 
+    public boolean previousX = false;
 
     @Override
     public void runOpMode() {
@@ -31,17 +32,19 @@ public class HoodTest extends LinearOpMode {
         theservo.setPosition(0.0);
 
         while (opModeIsActive()) {
+            boolean currentX = gamepad1.x;
             if (gamepad1.left_bumper) {
                 //increase pos
-                theservo.setPosition(theservo.getPosition() + stepSizes[currentPositionChangeAmount]);
+                theservo.setPosition(Math.min(1.0,theservo.getPosition() + stepSizes[currentPositionChangeAmount]));
             } else if (gamepad1.right_bumper) {
-                theservo.setPosition(theservo.getPosition() + stepSizes[currentPositionChangeAmount]);
-            } else if (gamepad1.x) {
-                currentPositionChangeAmount += 1;
+                theservo.setPosition(Math.max(0.0,theservo.getPosition() + stepSizes[currentPositionChangeAmount]));
+            } else if (currentX && !previousX) {
+                currentPositionChangeAmount++;
                 if (currentPositionChangeAmount >= 5) {
                     currentPositionChangeAmount = 0;
                 }
             }
+            previousX = currentX;
         }
     }
 }
