@@ -13,7 +13,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Light;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.hardware.limelightvision.LLResult;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
@@ -29,6 +32,7 @@ public class quickdrive extends OpMode {
     private MecanumDrive drive;
 
     private boolean initializedOther = false;
+    private boolean initializeLimelight = false;
     private RevIMU imu;
     private GamepadEx driverOp;
     private double targetX=100, targetY=100;
@@ -53,7 +57,19 @@ public class quickdrive extends OpMode {
         turret.setZeroPowerBehavior(BRAKE);
         return true;
     }
+    private boolean initLimelight() {
+        if (!initializeLimelight) return false;
+        Limelight3A limelight3A = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight3A.setPollRateHz(100);
+        limelight3A.start();
+        // TODO: Vision Loop - Call inside while (opModeIsActive())
+        // 1. Grab latest frame: LLResult result = limelight3A.getLatestResult();
+        // 2. Check target: if (result != null && result.isValid()) {
+        // 3. Pull 2D offsets: double tx = result.getTx(); double ty = result.getTy();
+        // 4. Pull 3D pose: Pose3D botpose = result.getBotpose(); // Use getBotpose_MT2() for MegaTag2
 
+        return true;
+    }
     @Override
     public void init() {
         runtime = new ElapsedTime();
